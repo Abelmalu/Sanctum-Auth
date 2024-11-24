@@ -3,8 +3,19 @@
 
 ## Installation 
 ### steps 
-....git clone git@github.com:Abelmalu/Sanctum-Auth.git
+Clone this repository
+``` bash 
+git git@github.com:Abelmalu/Sanctum-Auth.git 
+```
+Go to cloned directory
+```bash 
 cd Sanctum-Auth
-composer install
-php artisan install:api
-php artisan serve
+```
+and install required packeges
+```bash
+composer install 
+```
+>optional 
+>```bash
+>npm install
+>```
