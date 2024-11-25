@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/blogs',[BlogController::class,'index']);
-Route::post('/add/blog',[BlogController::class,'store']);
+Route::post('/add/blog',[BlogController::class,'store'])->middleware('auth:sanctum');
 Route::get('/blog/{id}',[BlogController::class,'show'])->middleware('auth:sanctum');
 Route::put('/update/blog/{id}',[BlogController::class,'update'])->middleware('auth:sanctum');
 Route::delete('/delete/blog/{id}',[BlogController::class,'destroy'])->middleware('auth:sanctum');
