@@ -47,7 +47,7 @@ class AuthController extends Controller
 
 
             return [
-                'user' => $user,
+                'user' => $user->name,
                 'token' => $token->plainTextToken
 
 
