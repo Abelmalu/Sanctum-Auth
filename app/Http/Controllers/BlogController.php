@@ -39,23 +39,36 @@ class BlogController extends Controller
 
             return $validator->errors();
         } else {
-            $imageUpload = $request->file('image')->store('blogs', 'public');
+
+
+            if($request->file('image')){
+
+                $imageUpload = ($request->file('image')->store('blogs', 'public'));
+
+
+            }
+            else{
+                $imageUpload = 'no image';
+
+            }
+
             $task = new Blog();
             $task->category_id = $request->get('category_id');
             $task->title = $request->get('title');
             $task->body = $request->get('body');
             $task->image = ($request->file('image'))  ? $imageUpload : '';
-
-
             $result = $task->save();
+
+
             if ($result) {
-                return ['success' => "task successfully saved"];
+                return $task;
             } else {
 
                 return ['error' => "not saved to the db"];
             }
 
     }
+
 }
 
 
@@ -77,32 +90,19 @@ class BlogController extends Controller
 
 
             $blog = Blog::find($id);
-            // return $blog;
+            
             $imageUpload = $request->file('image')->store('blogs', 'public');
 
 
 
-            // $blog->update([
-            //     'category_id' => ($request->get('category_id')) ? $request->get('category_id') : $blog->category_id,
-            //     'title' => ($request->get('title')) ? $request->get('title') : $blog->title,
-            //     'body' => ($request->get('body')) ? $request->get('body') : $blog->body,
-            //     'image' => ($request->file('image'))  ?$imageUpload : $blog->image
-            // ]);
+
 
             $blog->category_id =($request->get('category_id')) ? $request->get('category_id') : $blog->category_id;
             $blog->title = ($request->get('title')) ? $request->get('title') : $blog->title;
             $blog->body =($request->get('body')) ? $request->get('body') : $blog->body;
             $blog->image = ($request->file('image'))  ? $imageUpload : $blog->image;
 
-            // $flag ='hellow';
 
-            // if ($flag) {
-
-            //     return $blog;
-            // } else {
-
-            //     return 'something went wrong couldn not update ';
-            // }
 
             return 'succesfully Updated!';
 

@@ -24,9 +24,12 @@ const Register = () => {
     data.append('password',password)
     data.append('password_confirmation',password_confirmation)
 
-        axios.post('http://localhost:8000/api/register',data).then((data)=>{
+        axios.post('http://localhost:8000/api/register',data).then((res)=>{
 
-        console.log(data);
+        // console.log(data);
+        console.log(res.data.token)
+        console.log(res.data.user)
+        localStorage.setItem('authToken', res.data.token);
         navigate('/')
 
     })

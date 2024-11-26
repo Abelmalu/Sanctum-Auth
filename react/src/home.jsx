@@ -16,17 +16,23 @@ const Home = () => {
     const navigate = useNavigate()
 
 
-  
+
 
 
   const handleSubmit = (e)=>{
     e.preventDefault();
     const data = new FormData();
-    data.append('image',image)
+    if(image != null){
+        data.append('image',image)
+
+    }
+
     data.append('category_id',category_id)
     data.append('title',title)
     data.append('body',body)
 
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authToken')}`;
     axios.post('http://localhost:8000/api/add/blog', data).then((res)=>{
         return res.data
 
